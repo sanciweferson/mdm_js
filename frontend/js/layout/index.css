@@ -63,36 +63,33 @@
 /* =========================================================
    MOBILE SIDEBAR
 ========================================================= */
-
 .nav__aside {
-
   position: fixed;
-
   inset: 0 auto 0 0;
 
   width: 85%;
   height: 100vh;
 
-  padding: 2rem 1.5rem;
+  padding: 3rem 1.5rem 4rem 1.5rem;
+  /* top right bottom left */
 
   background-color: var(--sidebar);
-
   border-right: 1px solid var(--border);
 
   z-index: 1001;
 
-  display: flex;
-
-
-
-  justify-content: space-between;
+  
 
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
   transform: translateX(-100%);
-
   transition: transform var(--transition-normal);
+}
 
+.nav__aside::-webkit-scrollbar {
+  display: none;
 }
 
 .nav__aside {
@@ -115,8 +112,13 @@
   transform: translateX(0);
 
 }
+.nav__menu--mobile {
 
-
+  flex: 1;
+}
+.nav__menu--mobile-wrapper{
+  display: flex;
+}
 /* =========================================================
    MENU VISIBILITY
 ========================================================= */

@@ -184,12 +184,12 @@ class NavBar extends HTMLElement {
         </ul>
 
         <aside id="js-nav-aside" class="nav__aside">
-          <ul>
+        <div class="nav__menu--mobile-wrapper">  <ul class="nav__menu--mobile">
             ${navItems}
           </ul>
           <ul>
             ${createThemeToggle()}
-          </ul>
+          </ul></div>
         </aside>
       </nav>
     `;
