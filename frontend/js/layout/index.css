@@ -1,0 +1,342 @@
+padronize todas as cores e fontes e mande tudo completo * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.container {
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .theme-toggle {
+    background-color: transparent;
+    border: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+
+
+  .nav__icon--light svg {
+    color: var(--theme-sun);
+  }
+
+  .nav__icon--dark svg {
+    color: var(--theme-moon);
+  }
+
+
+  /* =========================================================
+   NAVBAR BASE (Mobile First)
+========================================================= */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1000;
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid var(--border)  ;
+  background-color: transparent;
+}
+
+.header.scrolled {
+  background-color: var(--chart-2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+  .nav-bar {
+    background-color: var(--nav-bg);
+    padding: 0 1rem;
+    min-height: 40px;
+    color: var(--secondary-foreground);
+    position: relative;
+    z-index: 50;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+  }
+
+  /* --- Mobile: Sidebar (Nav Aside) --- */
+  .nav__aside {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 85%;
+    height: 100vh;
+    padding: 2rem 1.5rem;
+    background-color: var(--sidebar);
+    border-right: 1px solid #333;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    justify-content: space-between;
+    display: flex;
+    overflow-y: auto;
+  }
+
+  .nav__aside.open {
+    transform: translateX(0);
+  }
+
+  /* Logo */
+  .nav__item--logo {
+    width: 80px;
+  }
+
+  /* Desktop menus começam ocultos */
+  .nav__menu--desktop,
+  .nav__menu--theme--desktop {
+    display: none;
+  }
+
+  /* Toggle visível no mobile */
+  .nav__menu-toggle {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+  }
+
+ 
+  .nav__submenu li a {
+ 
+
+    display: block;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+    /* background-color: var(--sidebar-border); */
+    border-radius: var(--radius);
+  }
+
+  .nav__submenu li a:active {
+    color: var(--sidebar-primary-foreground);
+    background-color: var(--sidebar-primary);
+    border-radius: var(--radius);
+  }
+
+  .nav__submenu li a:hover {
+    color: var(--chart-1);
+    background-color: var(--chart-3);
+    border-radius: var(--radius);
+  }
+
+  .nav__submenu {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 1.5rem 0;
+
+
+  }
+
+  .nav__dropdown {
+    font-size: 1.25rem;
+    color: var(--sidebar-foreground);
+  }
+
+
+    /* --- Footer Base --- */
+    .footer {
+      background-color: var(--background);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 1.5rem 0;
+      margin-top: 4rem;
+    }
+  
+    .i {
+      background-color: aqua;
+    }
+  
+    .footer__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      /* 1 coluna no mobile */
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+  
+    .footer__title {
+      color: var(--foreground);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  
+    .footer__sublist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .footer__sublist li {
+      margin-bottom: 0.5rem;
+    }
+  
+    .footer__sublist a {
+      color: var(--muted-foreground);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+  
+    .footer__sublist a:hover {
+      color: var(--primary);
+    }
+  
+    .footer__bottom {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted-foreground);
+      font-size: 0.85rem;
+    }
+
+  /* =========================================================
+   DESKTOP ENTRY (>= 920px)
+========================================================= */
+
+  @media (min-width: 920px) {
+      .footer__grid {
+          /* No desktop, as colunas ficam lado a lado */
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+    .nav-bar {
+      grid-template-columns: auto 1fr auto;
+    }
+
+    /* Toggle some */
+    .nav__menu-toggle {
+      display: none;
+    }
+
+    /* Menu aparece */
+    .nav__menu--desktop {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: clamp(0.75rem, 1vw, 0.9rem);
+    }
+
+    /* Actions aparecem */
+    .nav__menu--theme--desktop {
+      display: flex;
+      justify-self: end;
+      align-items: center;
+    }
+
+    .nav__dropdown {
+      position: relative;
+      padding: 8px 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    /* =========================
+     SUBMENU
+  ========================= */
+
+    .nav__submenu {
+      position: absolute;
+      top: 1.25rem;
+      left: 0;
+      background: var(--popover);
+      border: 1px solid var(--border);
+      min-width: 270px;
+      padding: 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      z-index: 100;
+      border-radius: var(--radius);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s ease;
+    }
+
+    .nav__dropdown:hover .nav__submenu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav__submenu li a {
+      color: var(--muted-foreground);
+      padding: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav__submenu li a:hover {
+      color: var(--primary);
+      background: var(--accent);
+      border-radius: 5px;
+    }
+
+  }
+
+  /* =========================================================
+   STABILITY RANGE (>=1160px)
+   Agora cabe tudo em linha
+========================================================= */
+
+  @media (min-width: 1160px) {
+
+    .nav__menu--desktop {
+      flex-wrap: nowrap;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .nav__dropdown {
+      padding: 10px 8px;
+    }
+
+  }
+
+  /* =========================================================
+   FULL DESKTOP (>=1280px)
+========================================================= */
+
+  @media (min-width: 1280px) {
+    .nav__dropdown {
+      font-size: 1rem;
+    }
+
+
+    .nav__dropdown {
+      padding: 15px 10px;
+    }
+
+  }
+
+  

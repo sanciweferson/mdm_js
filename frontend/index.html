@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Learning Platform</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="js/layout/index.js" defer></script>
+    <script src="js/spa/spa.js"  defer></script>
+    <script src="js/layout/scroll.js" defer></script>
+    <script src="js/layout/btnTop.js" defer></script>
+ 
+</head>
+<body>
+
+  <header class="header">
+      <nav-bar></nav-bar>
+  </header>
+
+    <main id="app">
+        <section class="container home">
+            <h1>Bem-vindo ao Guia de JavaScript</h1>
+            <p>Selecione um tópico no menu para começar a aprender.</p>
+         
+        </section>
+       
+       
+    </main>
+
+  
+
+          <button
+      id="btn-top"
+      aria-label="Voltar ao início da página"
+      title="Voltar ao topo"
+    >
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="bg" cx="50" cy="50" r="45" />
+        <circle class="progress" cx="50" cy="50" r="45" />
+        <path
+          class="arrow"
+          d="M50 30 L35 50 L45 50 L45 70 L55 70 L55 50 L65 50 Z"
+        />
+      </svg>
+    </button> 
+
+  <footer-bar></footer-bar>
+
+   <script type="module">
+      import { initMenu } from "/js/mobile/menuEvents.js"
+        import { initTheme } from "/js/theme/theme.init.js"
+     
+
+      window.onload = () => {
+         initTheme()
+        initMenu() // agora vai abrir o menu corretamente se estava aberto antes
+      
+      }
+ </script>
+</body>
+</html>
