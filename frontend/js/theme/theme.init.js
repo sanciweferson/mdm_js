@@ -5,7 +5,7 @@ import {
 } from "./theme.core.js"
 
 const setupThemeButtons = () => {
-  const buttons = document.querySelectorAll("#js-theme-toggle ")
+  const buttons = document.querySelectorAll(".theme-toggle ")
   if (!buttons.length) return
 
   const updateAriaLabels = () => {

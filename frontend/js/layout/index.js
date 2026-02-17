@@ -22,7 +22,7 @@ function createLogo() {
 function createThemeToggle() {
   return `
     <li>
-      <button id="js-theme-toggle" type="button" class="theme-toggle" aria-label="Alternar tema" aria-expanded="false">
+      <button  type="button" class="theme-toggle" aria-label="Alternar tema" aria-expanded="false">
         <span class="nav__icon--light">${Icons.sun}</span>
         <span class="nav__icon--dark hidden">${Icons.moon}</span>
       </button>
