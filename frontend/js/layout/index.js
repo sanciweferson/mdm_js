@@ -43,11 +43,16 @@ function createToggleMenu() {
 
 
 function createNavBar(item) {
-  const subPages = item.pages.map((page) => {
-    return `<li class="nav__item--subpage"><a href="${page.href}">${page.text}</a></li>`
+  const subPages = item.pages.map(page => {
+    // AJUSTE: Transformamos o caminho do JSON em uma rota de query string para a SPA
+    // Ex: de "/partials/pages/fundamentos/introducao/index.html" 
+    // Para: "fundamentos/introducao"
+    const rotaSpa = page.href
+      .replace('/partials/pages/', '')
+      .replace('/index.html', '');
 
-  })
-
+    return `<li><a href="?pagina=${rotaSpa}">${page.text}</a></li>`;
+  });
   return `
   <li  class="nav__dropdown" >
   <div class="nav__dropdown-title">${item.title}</div>

@@ -3,7 +3,9 @@ padronize todas as cores e fontes e mande tudo completo * {
   padding: 0;
   box-sizing: border-box;
 }
-
+.nav__btn-toggle{
+  color: var(--sidebar-foreground);
+}
 body {
   background-color: var(--background);
   color: var(--foreground);
