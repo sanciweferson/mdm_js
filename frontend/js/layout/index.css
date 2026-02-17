@@ -1,344 +1,337 @@
-padronize todas as cores e fontes e mande tudo completo * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-.nav__btn-toggle{
-  color: var(--sidebar-foreground);
-}
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-}
-
-.container {
-  max-width: 1380px;
-  margin: 0 auto;
-}
-
-
-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-
-
-  li {
-    list-style: none;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .theme-toggle {
-    background-color: transparent;
-    border: none;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-
-
-  .nav__icon--light svg {
-    color: var(--theme-sun);
-  }
-
-  .nav__icon--dark svg {
-    color: var(--theme-moon);
-  }
-
-
-  /* =========================================================
-   NAVBAR BASE (Mobile First)
+/* =========================================================
+   HEADER
 ========================================================= */
+
 .header {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 1000;
+
   padding: 1rem 0.75rem;
-  border-bottom: 1px solid var(--border)  ;
+
+  border-bottom: 1px solid var(--border);
+
   background-color: transparent;
+
+  transition:
+    background-color var(--transition-normal),
+    box-shadow var(--transition-normal);
 }
 
 .header.scrolled {
   background-color: var(--chart-2);
+
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+
+/* =========================================================
+   NAVBAR BASE
+========================================================= */
+
+.nav-bar {
+
+  display: grid;
+
+  grid-template-columns: auto auto;
+
+  align-items: center;
+
+  padding-inline: var(--space-md);
+
+  position: relative;
+
+  z-index: 50;
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.nav__item--logo svg {
+
+  width: 40px;
+  height: 40px;
+
+  display: block;
+
+}
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+.nav__aside {
+
+  position: fixed;
+
+  inset: 0 auto 0 0;
+
+  width: 85%;
+  height: 100vh;
+
+  padding: 2rem 1.5rem;
+
+  background-color: var(--sidebar);
+
+  border-right: 1px solid var(--border);
+
+  z-index: 1001;
+
+  display: flex;
+
+
+
+  justify-content: space-between;
+
+  overflow-y: auto;
+
+  transform: translateX(-100%);
+
+  transition: transform var(--transition-normal);
+
+}
+
+.nav__aside {
+  overflow-y: auto;
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* Internet Explorer / Edge antigo */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Edge, Safari */
+.nav__aside::-webkit-scrollbar {
+  display: none;
+}
+
+.nav__aside.open {
+
+  transform: translateX(0);
+
+}
+
+
+/* =========================================================
+   MENU VISIBILITY
+========================================================= */
+
+.nav__menu--desktop,
+.nav__menu--theme--desktop {
+
+  display: none;
+
+}
+
+.nav__menu-toggle {
+
+  justify-self: end;
+
+  display: flex;
+
+  align-items: center;
+
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.nav__dropdown {
+
+  width: 100%;
+
+  margin-bottom: var(--space-md);
+
+}
+
+.nav__dropdown-title {
+
+  width: 100%;
+
+  text-align: left;
+
+  font-size: 1.1rem;
+
+  padding: 0.5rem 0;
+
+  color: var(--sidebar-foreground);
+
+  font-weight: 600;
+
+}
+
+.nav__submenu {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.75rem;
+
+  padding-left: var(--space-md);
+
+  margin-top: var(--space-sm);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+  background-color: var(--background);
+
+  border-top: 1px solid var(--border);
+
+  padding: 3rem 0 1.5rem;
+
+  margin-top: 4rem;
+
+}
+
+.footer__grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: var(--space-lg);
+
+  padding-inline: var(--space-lg);
+
+}
+
+.footer__bottom {
+
+  margin-top: 3rem;
+
+  padding: 1.5rem 0;
+
+  border-top: 1px solid var(--border);
+
+  text-align: center;
+
+  color: var(--muted-foreground);
+
+  font-size: 0.85rem;
+
+}
+
+
+
+@media (min-width: 920px) {
+  .footer__grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
   .nav-bar {
-    background-color: var(--nav-bg);
-    padding: 0 1rem;
-    min-height: 40px;
-    color: var(--secondary-foreground);
-    position: relative;
-    z-index: 50;
-
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--gap);
   }
 
-  /* --- Mobile: Sidebar (Nav Aside) --- */
+  /* Esconde toggle de mobile e sidebar */
+  .nav__menu-toggle,
   .nav__aside {
-    position: fixed;
-    inset: 0 auto 0 0;
-    width: 85%;
-    height: 100vh;
-    padding: 2rem 1.5rem;
-    background-color: var(--sidebar);
-    border-right: 1px solid #333;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: 1000;
-    justify-content: space-between;
-    display: flex;
-    overflow-y: auto;
-  }
-
-  .nav__aside.open {
-    transform: translateX(0);
-  }
-
-  /* Logo */
-  .nav__item--logo {
-    width: 80px;
-  }
-
-  /* Desktop menus começam ocultos */
-  .nav__menu--desktop,
-  .nav__menu--theme--desktop {
     display: none;
   }
 
-  /* Toggle visível no mobile */
-  .nav__menu-toggle {
-    justify-self: end;
+  /* Exibe menus de desktop */
+  .nav__menu--desktop {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
   }
 
- 
-  .nav__submenu li a {
- 
+  .nav__menu--theme--desktop {
+    display: flex;
+    justify-self: end;
+  }
 
-    display: block;
+  /* Configuração do Dropdown Desktop (Hover) */
+  .nav__dropdown {
+    position: relative;
     padding: 0.5rem;
-    transition: all 0.2s ease;
-    /* background-color: var(--sidebar-border); */
-    border-radius: var(--radius);
+    margin-bottom: 0;
+    width: auto;
   }
 
-  .nav__submenu li a:active {
-    color: var(--sidebar-primary-foreground);
-    background-color: var(--sidebar-primary);
+  .nav__dropdown-title {
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  /* Submenu flutuante no Desktop */
+  .nav__submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--popover);
+    border: 1px solid var(--border);
+    min-width: 240px;
+    padding: 1rem;
+    margin: 0;
     border-radius: var(--radius);
+    z-index: 999;
+    /* Efeito de transição suave */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Exibe o submenu ao passar o mouse no item pai */
+  .nav__dropdown:hover .nav__submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav__submenu li a {
+    padding: 0.5rem;
+    color: var(--muted-foreground);
   }
 
   .nav__submenu li a:hover {
-    color: var(--chart-1);
-    background-color: var(--chart-3);
-    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--primary);
+  }
+}
+
+@media (min-width: 920px) and (max-width: 1188px) {
+
+  /* Ajuste do SVG dentro do botão */
+  .theme-toggle svg {
+    display: block;
+    /* Remove o comportamento inline que cria espaço embaixo */
+    width: 16px;
+    /* Ajuste o tamanho conforme sua necessidade */
+    height: 16px;
+    margin: 0;
+    /* Garante que não haja margens externas */
   }
 
-  .nav__submenu {
-    font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    margin: 1.5rem 0;
-
-
+  .nav__item--logo svg {
+    width: 24;
   }
 
-  .nav__dropdown {
-    font-size: 1.25rem;
-    color: var(--sidebar-foreground);
+  .nav__dropdown-title {
+    font-size: 10px;
   }
+}
 
-
-    /* --- Footer Base --- */
-    .footer {
-      background-color: var(--background);
-      border-top: 1px solid var(--border);
-      padding: 3rem 0 1.5rem 0;
-      margin-top: 4rem;
-    }
-  
-    .i {
-      background-color: aqua;
-    }
-  
-    .footer__grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      /* 1 coluna no mobile */
-      gap: 2rem;
-      padding: 0 2rem;
-    }
-  
-    .footer__title {
-      color: var(--foreground);
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-  
-    .footer__sublist {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-  
-    .footer__sublist li {
-      margin-bottom: 0.5rem;
-    }
-  
-    .footer__sublist a {
-      color: var(--muted-foreground);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-  
-    .footer__sublist a:hover {
-      color: var(--primary);
-    }
-  
-    .footer__bottom {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      color: var(--muted-foreground);
-      font-size: 0.85rem;
-    }
-
-  /* =========================================================
-   DESKTOP ENTRY (>= 920px)
-========================================================= */
-
-  @media (min-width: 920px) {
-      .footer__grid {
-          /* No desktop, as colunas ficam lado a lado */
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
-
-    .nav-bar {
-      grid-template-columns: auto 1fr auto;
-    }
-
-    /* Toggle some */
-    .nav__menu-toggle {
-      display: none;
-    }
-
-    /* Menu aparece */
-    .nav__menu--desktop {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      font-size: clamp(0.75rem, 1vw, 0.9rem);
-    }
-
-    /* Actions aparecem */
-    .nav__menu--theme--desktop {
-      display: flex;
-      justify-self: end;
-      align-items: center;
-    }
-
-    .nav__dropdown {
-      position: relative;
-      padding: 8px 6px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    /* =========================
-     SUBMENU
-  ========================= */
-
-    .nav__submenu {
-      position: absolute;
-      top: 1.25rem;
-      left: 0;
-      background: var(--popover);
-      border: 1px solid var(--border);
-      min-width: 270px;
-      padding: 1.25rem 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      z-index: 100;
-      border-radius: var(--radius);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(10px);
-      transition: all 0.2s ease;
-    }
-
-    .nav__dropdown:hover .nav__submenu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .nav__submenu li a {
-      color: var(--muted-foreground);
-      padding: 0.5rem;
-      transition: all 0.2s ease;
-    }
-
-    .nav__submenu li a:hover {
-      color: var(--primary);
-      background: var(--accent);
-      border-radius: 5px;
-    }
-
+/* ========================================================= AJUSTES PARA TELAS GRANDES (>= 1160px) ========================================================= */
+@media (min-width: 1280px) {
+  .nav__dropdown-title {
+    padding: 0.25rem;
+    font-size: 16px;
   }
-
-  /* =========================================================
-   STABILITY RANGE (>=1160px)
-   Agora cabe tudo em linha
-========================================================= */
-
-  @media (min-width: 1160px) {
-
-    .nav__menu--desktop {
-      flex-wrap: nowrap;
-      gap: 0.8rem;
-      font-size: 0.95rem;
-    }
-
-    .nav__dropdown {
-      padding: 10px 8px;
-    }
-
-  }
-
-  /* =========================================================
-   FULL DESKTOP (>=1280px)
-========================================================= */
-
-  @media (min-width: 1280px) {
-    .nav__dropdown {
-      font-size: 1rem;
-    }
-
-
-    .nav__dropdown {
-      padding: 15px 10px;
-    }
-
-  }
-
-  
+}

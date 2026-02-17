@@ -1,14 +1,48 @@
+/* =========================================================
+   BASE
+========================================================= */
+@import "reset.css";
 @import "root.css";
+@import "components.css";
 @import "js/layout/index.css";
-/* ===== Base / Reset leve ===== */
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--chart-1) transparent;
+  scrollbar-color: var(--sidebar-ring) transparent;
 }
 
+body {
+  background: var(--background);
+  color: var(--foreground);
+  line-height: var(--line-height-base);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+/* =========================================================
+   APP STRUCTURE
+========================================================= */
+
+#app {
+  min-height: 100vh;
+  margin-top: var(--header-height);
+}
+
+/* =========================================================
+   SCROLLBAR WEBKIT
+========================================================= */
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -16,92 +50,6 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--chart-1);
+  background: var(--sidebar-ring);
   border-radius: 10px;
-}
-
-#app {
-  flex: 1;
-margin-top: 6rem;
-}
-.home{
-padding: 2rem;
-}
-.home h1{
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-.home p{
-  font-size: 1.25rem;
-  color: var(--secondary-foreground);
-}
-
-
-/* --- Botão Voltar ao Topo --- */
-#btn-top {
-  position: fixed;
-  right: 1.2rem;
-  bottom: 1.2rem;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: color-mix(in oklch, var(--chart-4) 70%, var(--sidebar-ring) 30%);
-  backdrop-filter: blur(8px);
-  cursor: pointer;
-  z-index: 9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px) scale(0.9);
-  transition: all 0.3s ease;
-
-}
-
-#btn-top.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0) scale(1);
-}
-
-#btn-top svg {
-  width: 100%;
-  height: 100%;
-  transform: rotate(-90deg);
-  position: absolute;
-}
-
-#btn-top .bg {
-  fill: none;
-  stroke: var(--border);
-  stroke-width: 6;
-}
-
-#btn-top .progress {
-  fill: none;
-  stroke: var(--primary);
-  stroke-width: 6;
-  stroke-linecap: round;
-  /* Circunferência para raio 45 é ~283 */
-  stroke-dasharray: 283;
-  stroke-dashoffset: 283;
-  transition: stroke-dashoffset 0.1s linear;
-}
-
-#btn-top i {
-  font-size: 1.2rem;
-  color: var(--primary);
-  z-index: 2;
-}
-
-#btn-top .arrow {
-  fill: var(--primary-foreground);
-  transform: rotate(90deg);
-  transform-origin: center;
-}
-
-#btn-top:hover {
-  transform: scale(1.1);
 }
