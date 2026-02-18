@@ -20,11 +20,11 @@ export const updateTheme = (isDark) => {
   htmlElement.setAttribute("data-theme", isDark ? "dark" : "light")
 
   document
-    .querySelectorAll(".nav__icon--dark")
+    .querySelectorAll(".icon--moon")
     .forEach((el) => el.classList.toggle("hidden", isDark))
 
   document
-    .querySelectorAll(".nav__icon--light")
+    .querySelectorAll(".icon--sun")
     .forEach((el) => el.classList.toggle("hidden", !isDark))
 }
 
