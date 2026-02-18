@@ -47,10 +47,10 @@ function createToggleMenu() {
 function createThemeToggle() {
   return `
   <li>
-    <button class="theme-toggle" aria-label="Alternar tema">
-      <span class="icon-light">${Icons.sun}</span>
-      <span class="icon-dark hidden">${Icons.moon}</span>
-    </button>
+  <button class="theme-toggle" aria-label="Alternar tema claro/escuro">
+        <span class="nav__icon--light">${Icons.sun}</span>
+        <span class="nav__icon--dark hidden">${Icons.moon}</span>
+      </button>
   </li>`;
 }
 
