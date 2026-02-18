@@ -1,6 +1,7 @@
 [
   {
     "title": "Fundamentos",
+    "shortTitle": "Fund.",
     "icon": "home",
     "pages": [
       {
@@ -23,10 +24,11 @@
   },
   {
     "title": "Variáveis e Tipos",
+    "shortTitle": "Vars & Tipos",
     "icon": "chapters",
     "pages": [
       { "text": "var", "href": "/partials/pages/variaveis/var/index.html" },
-      { "text": " let ", "href": "/partials/pages/variaveis/let/index.html" },
+      { "text": "let", "href": "/partials/pages/variaveis/let/index.html" },
       { "text": "const", "href": "/partials/pages/variaveis/const/index.html" },
       {
         "text": "Tipos Primitivos",
@@ -44,6 +46,7 @@
   },
   {
     "title": "Lógica e Fluxo",
+    "shortTitle": "Lógica",
     "icon": "bulb",
     "pages": [
       {
@@ -70,6 +73,7 @@
   },
   {
     "title": "Funções",
+    "shortTitle": "Funções",
     "icon": "bulb",
     "pages": [
       {
@@ -92,6 +96,7 @@
   },
   {
     "title": "Objetos e Arrays",
+    "shortTitle": "Obj & Arrays",
     "icon": "user",
     "pages": [
       {
@@ -114,6 +119,7 @@
   },
   {
     "title": "Dominação do DOM",
+    "shortTitle": "DOM",
     "icon": "contact",
     "pages": [
       {
@@ -136,6 +142,7 @@
   },
   {
     "title": "JS Assíncrono",
+    "shortTitle": "Async JS",
     "icon": "summary",
     "pages": [
       {
@@ -158,6 +165,7 @@
   },
   {
     "title": "Orientação a Objetos",
+    "shortTitle": "POO",
     "icon": "chapters",
     "pages": [
       {

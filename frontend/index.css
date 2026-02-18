@@ -53,3 +53,22 @@ body {
   background: var(--sidebar-ring);
   border-radius: 10px;
 }
+
+
+/* =========================================================
+   APP STRUCTURE
+   ========================================================= */
+#app {
+  min-height: 100vh;
+  /* Usa a variável de altura do header para empurrar o conteúdo para baixo */
+  margin-top: var(--header-height);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Garante que o container não deixe o menu "vazar" na horizontal no mobile */
+body {
+  overflow-x: hidden;
+  background-color: var(--background);
+  color: var(--foreground);
+}

@@ -1,243 +1,486 @@
 /* =========================================================
-   HEADER
+   RESET E ESTILOS GLOBAIS
 ========================================================= */
-
-.header {
-  position: fixed;
-  inset: 0 0 auto 0;
-  z-index: 1000;
-
-  padding: 1rem 0.75rem;
-
-  border-bottom: 1px solid var(--border);
-
-  background-color: transparent;
-
-  transition:
-    background-color var(--transition-normal),
-    box-shadow var(--transition-normal);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Garante que padding/border não aumentem o tamanho do elemento */
 }
-
-.header.scrolled {
-  background-color: var(--chart-2);
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.theme-toggle{
+  display: block;
 }
-
-
-/* =========================================================
-   NAVBAR BASE
-========================================================= */
-
-.nav-bar {
-
-  display: grid;
-
-  grid-template-columns: auto auto;
-
-  align-items: center;
-
-  padding-inline: var(--space-md);
-
-  position: relative;
-
-  z-index: 50;
-
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.5;
+  /* Melhora a legibilidade do texto */
 }
+/* ==========================================================================
+   CORREÇÃO DO BOTÃO DE TEMA (Espaçamento e Centralização)
+   ========================================================================== */
 
+.theme-toggle {
+  /* Remove qualquer padding padrão que possa empurrar o ícone */
+  padding: 0;
 
-/* =========================================================
-   LOGO
-========================================================= */
-
-.nav__item--logo svg {
-
+  /* Define um tamanho fixo para o botão para garantir que seja um círculo/quadrado perfeito */
   width: 40px;
   height: 40px;
 
-  display: block;
+  /* Flexbox é a melhor forma de centralizar o SVG sem sobras embaixo */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  /* Garante que o fundo seja transparente e sem bordas */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  /* Ajuste de linha para evitar o espaço de 'descida' de fontes (line-height) */
+  line-height: 0;
+
+  /* Opcional: arredondar o foco/botão */
+  border-radius: var(--radius, 8px);
+  transition: background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--accent);
+  /* Um leve destaque ao passar o mouse */
+}
+
+/* Ajuste do SVG dentro do botão */
+.theme-toggle svg {
+  display: block;
+  /* Remove o comportamento inline que cria espaço embaixo */
+  width: 24px;
+  /* Ajuste o tamanho conforme sua necessidade */
+  height: 24px;
+  margin: 0;
+  /* Garante que não haja margens externas */
+}
+
+/* Esconde o ícone que não está ativo */
+.theme-toggle .hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   ACESSIBILIDADE (Foco e Leitores de Tela)
+   ========================================================================== */
+
+ 
+
+/* ==========================================================================
+   ACESSIBILIDADE (Foco e Leitores de Tela)
+   ========================================================================== */
+
+/**
+ * .visually-hidden:
+ * Esconde elementos visualmente (como rótulos extras), mas os mantém
+ * acessíveis para leitores de tela (Screen Readers).
+ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  /* Fallback para navegadores antigos */
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/**
+ * FOCO DO TECLADO (:focus-visible):
+ * Garante que quem navega via TAB consiga ver onde está o seletor.
+ * Nota: Usei seletores genéricos que existem no seu projeto.
+ */
+
+/* Estilo do anel de foco */
+.nav-bar a:focus-visible,
+.nav-bar button:focus-visible,
+.footer a:focus-visible {
+  /* Se var(--ring) não existir, ele usará a cor azul padrão do navegador */
+  outline: 2px solid var(--ring, #2563eb);
+  outline-offset: 4px;
+  border-radius: var(--radius, 4px);
+  transition: outline-offset 0.1s ease;
+}
+
+/**
+ * LIMPEZA PARA MOUSE:
+ * Remove o contorno de foco quando o usuário clica com o mouse,
+ * mantendo o layout limpo para quem não precisa do indicador visual.
+ */
+.nav-bar a:focus:not(:focus-visible),
+.nav-bar button:focus:not(:focus-visible),
+.footer a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/**
+ * PREFERÊNCIA DE MOVIMENTO REDUZIDO:
+ * Caso o usuário tenha configurado o sistema para "menos animação",
+ * desativamos as transições da sidebar e menus.
+ */
+@media (prefers-reduced-motion: reduce) {
+
+  .nav__aside,
+  .nav__submenu,
+  .header {
+    transition: none !important;
+  }
 }
 
 
+
+
+
+
+/* Padronização de elementos interativos */
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Utilitário para esconder elementos (importante para acessibilidade) */
+.hidden {
+  display: none !important;
+}
+
+/* Cores dos ícones de tema baseadas nas variáveis */
+.nav__icon--light svg {
+  color: var(--theme-sun);
+}
+
+.nav__icon--dark svg {
+  color: var(--theme-moon);
+}
+
 /* =========================================================
-   MOBILE SIDEBAR
+   HEADER E NAVBAR (Mobile First)
 ========================================================= */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  /* Fixa no topo (top, right, bottom, left) */
+  z-index: 1000;
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+/* Estado quando o usuário rola a página */
+.header.scrolled {
+  background-color: var(--chart-2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-bar {
+  background-color: var(--nav-bg);
+  padding: 0 1rem;
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: auto auto;
+  /* Espaça logo e botão hambúrguer */
+  align-items: center;
+  position: relative;
+  z-index: 50;
+}
+
+/* Estilização da Logo */
+.nav__item--logo svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+/* --- Menu Lateral (Sidebar Mobile) --- */
 .nav__aside {
   position: fixed;
   inset: 0 auto 0 0;
-
   width: 85%;
+  /* max-width: 320px; */
   height: 100vh;
-
-  padding: 3rem 1.5rem 4rem 1.5rem;
-  /* top right bottom left */
-
+  padding: 2rem 1.5rem;
   background-color: var(--sidebar);
   border-right: 1px solid var(--border);
-
   z-index: 1001;
 
-  
-
   overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
 
+  /* Animação de deslize */
   transform: translateX(-100%);
-  transition: transform var(--transition-normal);
+  transition: transform 0.3s ease-in-out;
 }
 
-.nav__aside::-webkit-scrollbar {
-  display: none;
+/* Classe ativada via JS para abrir o menu */
+.nav__aside.open {
+  transform: translateX(0);
 }
+.nav__aside::-webkit-scrollbar {
+
+  display: none;
+
+}
+
+
 
 .nav__aside {
+
   overflow-y: auto;
 
+
+
   /* Firefox */
+
   scrollbar-width: none;
 
+
+
   /* Internet Explorer / Edge antigo */
+
   -ms-overflow-style: none;
+
 }
+
+
 
 /* Chrome, Edge, Safari */
+
 .nav__aside::-webkit-scrollbar {
+
   display: none;
-}
-
-.nav__aside.open {
-
-  transform: translateX(0);
 
 }
-.nav__menu--mobile {
-
-  flex: 1;
-}
-.nav__menu--mobile-wrapper{
+.nav__aside-content{
   display: flex;
+  justify-content: space-between;
+  padding-bottom: 2rem;
 }
-/* =========================================================
-   MENU VISIBILITY
-========================================================= */
 
+/* Esconde menus de desktop no mobile */
 .nav__menu--desktop,
 .nav__menu--theme--desktop {
-
   display: none;
-
 }
 
 .nav__menu-toggle {
-
   justify-self: end;
-
   display: flex;
-
   align-items: center;
-
 }
 
-
-/* =========================================================
-   DROPDOWN
-========================================================= */
-
+/* Estilos de Dropdown no Mobile */
 .nav__dropdown {
-
   width: 100%;
-
-  margin-bottom: var(--space-md);
-
+  margin-bottom: 1rem;
 }
 
 .nav__dropdown-title {
-
   width: 100%;
-
   text-align: left;
-
   font-size: 1.1rem;
-
   padding: 0.5rem 0;
-
   color: var(--sidebar-foreground);
-
   font-weight: 600;
-
 }
 
+/* Submenu Mobile */
 .nav__submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Ajuste de links no submenu mobile */
+.nav__submenu li a {
+  display: block;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  transition: background 0.2s;
+}
+
+.nav__submenu li a:hover {
+  background-color: var(--chart-3);
+  color: var(--chart-1);
+}
+
+/* ===============================
+   BOTÃO VOLTAR AO TOPO
+================================ */
+#btn-top {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+
+  background: color-mix(in oklch,
+      var(--background) 70%,
+      var(--sidebar-ring) 30%);
+
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  z-index: 999;
 
   display: flex;
+  align-items: center;
+  justify-content: center;
 
-  flex-direction: column;
+  box-shadow:
+    0 6px 20px oklch(0 0 0 / 20%),
+    0 2px 8px oklch(0 0 0 / 12%);
 
-  gap: 0.75rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.9);
 
-  padding-left: var(--space-md);
-
-  margin-top: var(--space-sm);
-
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
+#btn-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+#btn-top:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+#btn-top svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+#btn-top .bg {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 6;
+}
+
+#btn-top .progress {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 6;
+  stroke-linecap: round;
+
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+
+  transition: stroke-dashoffset 0.15s linear, stroke 0.3s ease;
+}
+
+#btn-top .arrow {
+  fill: var(--primary-foreground);
+  transform: rotate(90deg);
+  transform-origin: center;
+}
+
+#btn-top:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 10px 28px oklch(0 0 0 / 28%),
+    0 4px 12px oklch(0 0 0 / 18%);
+}
+
+#btn-top:hover .progress {
+  stroke: var(--ring);
+}
 
 /* =========================================================
-   FOOTER
+   FOOTER (Rodapé)
 ========================================================= */
-
 .footer {
-
   background-color: var(--background);
-
   border-top: 1px solid var(--border);
-
-  padding: 3rem 0 1.5rem;
-
+  padding: 3rem 0 1.5rem 0;
   margin-top: 4rem;
-
 }
 
 .footer__grid {
-
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
+  /* 2 colunas no mobile */
+  gap: 2rem;
+  padding: 0 1.5rem;
+}
 
-  gap: var(--space-lg);
+.footer__title {
+  color: var(--foreground);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
-  padding-inline: var(--space-lg);
+.footer__sublist li {
+  margin-bottom: 0.6rem;
+}
 
+.footer__sublist a {
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.footer__sublist a:hover {
+  color: var(--primary);
 }
 
 .footer__bottom {
-
   margin-top: 3rem;
-
   padding: 1.5rem 0;
-
   border-top: 1px solid var(--border);
-
   text-align: center;
-
   color: var(--muted-foreground);
-
   font-size: 0.85rem;
-
 }
 
+/* =========================================================
+   DESKTOP (A partir de 768px)
+========================================================= */
+@media (min-width: 788px) {
 
-
-@media (min-width: 920px) {
   .footer__grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
   .nav-bar {
     grid-template-columns: auto 1fr auto;
-    gap: var(--gap);
+    gap: 1.5rem;
   }
 
   /* Esconde toggle de mobile e sidebar */
@@ -258,82 +501,72 @@
     justify-self: end;
   }
 
-  /* Configuração do Dropdown Desktop (Hover) */
-  .nav__dropdown {
-    position: relative;
-    padding: 0.5rem;
-    margin-bottom: 0;
-    width: auto;
-  }
 
-  .nav__dropdown-title {
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
+    /* Estado padrão */
+    .nav__abbr {
+      display: none;
+    }
+  
+    .nav__full {
+      display: inline;
+    }
 
-  /* Submenu flutuante no Desktop */
-  .nav__submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--popover);
-    border: 1px solid var(--border);
-    min-width: 240px;
-    padding: 1rem;
-    margin: 0;
-    border-radius: var(--radius);
-    z-index: 999;
-    /* Efeito de transição suave */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Exibe o submenu ao passar o mouse no item pai */
-  .nav__dropdown:hover .nav__submenu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .nav__submenu li a {
-    padding: 0.5rem;
-    color: var(--muted-foreground);
-  }
-
-  .nav__submenu li a:hover {
-    background: var(--accent);
-    color: var(--primary);
-  }
+        /* Configuração do Dropdown Desktop (Hover) */
+        .nav__dropdown {
+          position: relative;
+          padding: 0.5rem;
+          margin-bottom: 0;
+          width: auto;
+        }
+    
+        .nav__dropdown-title {
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+    
+        /* Submenu flutuante no Desktop */
+        .nav__submenu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: var(--popover);
+          border: 1px solid var(--border);
+          min-width: 240px;
+          padding: 1rem;
+          margin: 0;
+          border-radius: var(--radius);
+          z-index: 999;
+          /* Efeito de transição suave */
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(10px);
+          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    
+        /* Exibe o submenu ao passar o mouse no item pai */
+        .nav__dropdown:hover .nav__submenu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+    
+        .nav__submenu li a {
+          padding: 0.5rem;
+          color: var(--muted-foreground);
+        }
+    
+        .nav__submenu li a:hover {
+          background: var(--accent);
+          color: var(--primary);
+        }
 }
-
-@media (min-width: 920px) and (max-width: 1188px) {
-
-  /* Ajuste do SVG dentro do botão */
-  .theme-toggle svg {
-    display: block;
-    /* Remove o comportamento inline que cria espaço embaixo */
-    width: 16px;
-    /* Ajuste o tamanho conforme sua necessidade */
-    height: 16px;
-    margin: 0;
-    /* Garante que não haja margens externas */
-  }
-
-  .nav__item--logo svg {
-    width: 24;
-  }
-
-  .nav__dropdown-title {
-    font-size: 10px;
-  }
-}
-
-/* ========================================================= AJUSTES PARA TELAS GRANDES (>= 1160px) ========================================================= */
-@media (min-width: 1280px) {
-  .nav__dropdown-title {
-    padding: 0.25rem;
-    font-size: 16px;
-  }
-}
+    /* Entre 768px e 1159px */
+    @media (min-width: 768px) and (max-width: 1159px) {
+      .nav__abbr {
+        display: inline;
+      }
+  
+      .nav__full {
+        display: none;
+      }
+    }
